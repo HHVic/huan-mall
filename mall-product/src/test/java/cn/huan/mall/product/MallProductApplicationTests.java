@@ -11,6 +11,7 @@ class MallProductApplicationTests {
 
     @Autowired
     BrandService brandService;
+
     @Test
     public void contextLoads() {
         BrandEntity brandEntity = new BrandEntity();
