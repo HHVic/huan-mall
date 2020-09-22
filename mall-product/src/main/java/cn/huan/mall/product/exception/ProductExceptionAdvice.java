@@ -35,6 +35,7 @@ public class ProductExceptionAdvice {
     @ExceptionHandler(value = Throwable.class)
     public R exceptionHandler(Throwable throwable) {
         log.error("出现未知异常：{},异常类型：{}", throwable.getMessage(), throwable.getClass());
+        throwable.printStackTrace();
         return R.error(BaseExceptionEnum.UNKNOWN_EXECPTION.getCode(),
                 BaseExceptionEnum.UNKNOWN_EXECPTION.getMessage());
     }

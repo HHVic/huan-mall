@@ -1,9 +1,10 @@
 package cn.huan.mall.product.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import cn.huan.common.utils.PageUtils;
 import cn.huan.mall.product.entity.CategoryBrandRelationEntity;
+import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,11 @@ import java.util.Map;
 public interface CategoryBrandRelationService extends IService<CategoryBrandRelationEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<CategoryBrandRelationEntity> listCategory(Long brandId);
+
+    void updateBrand(Long brandId, String name);
+
+    void updateCategory(Long catId, String name);
 }
 

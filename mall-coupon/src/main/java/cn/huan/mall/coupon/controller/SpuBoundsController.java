@@ -1,19 +1,14 @@
 package cn.huan.mall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cn.huan.mall.coupon.entity.SpuBoundsEntity;
-import cn.huan.mall.coupon.service.SpuBoundsService;
 import cn.huan.common.utils.PageUtils;
 import cn.huan.common.utils.R;
+import cn.huan.mall.coupon.entity.SpuBoundsEntity;
+import cn.huan.mall.coupon.service.SpuBoundsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -55,7 +50,7 @@ public class SpuBoundsController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody SpuBoundsEntity spuBounds){
+    public R saveSpuCoupon(@RequestBody SpuBoundsEntity spuBounds){
 		spuBoundsService.save(spuBounds);
 
         return R.ok();

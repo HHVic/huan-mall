@@ -1,20 +1,20 @@
 package cn.huan.mall.product.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cn.huan.mall.product.entity.CategoryBrandRelationEntity;
-import cn.huan.mall.product.service.CategoryBrandRelationService;
 import cn.huan.common.utils.PageUtils;
 import cn.huan.common.utils.R;
+import cn.huan.mall.product.entity.BrandEntity;
+import cn.huan.mall.product.entity.CategoryBrandRelationEntity;
+import cn.huan.mall.product.service.BrandService;
+import cn.huan.mall.product.service.CategoryBrandRelationService;
+import cn.huan.mall.product.service.CategoryService;
+import cn.huan.mall.product.vo.BrandVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -30,6 +30,32 @@ public class CategoryBrandRelationController {
     @Autowired
     private CategoryBrandRelationService categoryBrandRelationService;
 
+    @Autowired
+    private BrandService brandService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @GetMapping("/catelog/list")
+    public R listCategory(@RequestParam Long brandId){
+        List<CategoryBrandRelationEntity> categoryBrandRelationEntity =
+                categoryBrandRelationService.listCategory(brandId);
+        return R.ok().put("data",categoryBrandRelationEntity);
+    }
+
+//    /product/categorybrandrelation/brands/list
+//    获取指定分类下所有品牌列表
+    @GetMapping("/brands/list")
+    public R listBrandCategoryRelaiton(@RequestParam Long catId){
+        List<BrandEntity> brandEntities = brandService.listBrandCategoryRelaiton(catId);
+        List<BrandVo> brandVos = brandEntities.stream().map(entity -> {
+            BrandVo brandVo = new BrandVo();
+            brandVo.setBrandId(entity.getBrandId());
+            brandVo.setBrandName(entity.getName());
+            return brandVo;
+        }).collect(Collectors.toList());
+        return R.ok().put("data",brandVos);
+    }
     /**
      * 列表
      */
@@ -56,6 +82,13 @@ public class CategoryBrandRelationController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody CategoryBrandRelationEntity categoryBrandRelation){
+        //设置数据库品牌名和分类名
+        categoryBrandRelation.setCatelogName(
+                categoryService.getById(categoryBrandRelation.getCatelogId()).getName()
+        );
+        categoryBrandRelation.setBrandName(
+                brandService.getById(categoryBrandRelation.getBrandId()).getName()
+        );
 		categoryBrandRelationService.save(categoryBrandRelation);
 
         return R.ok();

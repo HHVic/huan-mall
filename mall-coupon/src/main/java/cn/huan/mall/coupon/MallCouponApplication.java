@@ -6,7 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-public class MallCouponApplication {
+public class  MallCouponApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MallCouponApplication.class, args);

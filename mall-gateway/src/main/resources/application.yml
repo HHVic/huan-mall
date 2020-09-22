@@ -13,6 +13,14 @@ spring:
             - Path=/api/product/**
           filters:
             - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+#        会员管理路由
+        - id: member_route
+          uri: lb://mall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+#        第三方服务路由
         - id: thirdparty_route
           uri: lb://mall-third-party
           predicates:

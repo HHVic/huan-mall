@@ -1,19 +1,15 @@
 package cn.huan.mall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cn.huan.mall.coupon.entity.SkuFullReductionEntity;
-import cn.huan.mall.coupon.service.SkuFullReductionService;
+import cn.huan.common.to.SkuReductionTo;
 import cn.huan.common.utils.PageUtils;
 import cn.huan.common.utils.R;
+import cn.huan.mall.coupon.entity.SkuFullReductionEntity;
+import cn.huan.mall.coupon.service.SkuFullReductionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -55,9 +51,8 @@ public class SkuFullReductionController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody SkuFullReductionEntity skuFullReduction){
-		skuFullReductionService.save(skuFullReduction);
-
+    public R saveSkuReduction(@RequestBody SkuReductionTo skuReductionTo){
+		skuFullReductionService.saveSkuReduction(skuReductionTo);
         return R.ok();
     }
 
