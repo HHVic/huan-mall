@@ -20,12 +20,18 @@ import java.util.Map;
  */
 public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
-	
+
+	public R addData(Object data){
+		put("data",data);
+		return this;
+	}
+	public Object getData(){
+		return get("data");
+	}
 	public R() {
 		put("code", 0);
 		put("msg", "success");
 	}
-	
 	public static R error() {
 		return error(HttpStatus.SC_INTERNAL_SERVER_ERROR, "未知异常，请联系管理员");
 	}

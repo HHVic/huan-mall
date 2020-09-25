@@ -34,4 +34,26 @@ public class ProductConstant {
             return code;
         }
     }
+
+    public enum PublishStatus{
+        NEW(0,"新建"),
+        UP(1,"上架"),
+        DOWN(2,"下架"),
+        ;
+        private int code;
+        private String value;
+
+        PublishStatus(int code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
 }

@@ -1,19 +1,18 @@
 package cn.huan.mall.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cn.huan.mall.ware.entity.PurchaseEntity;
-import cn.huan.mall.ware.service.PurchaseService;
 import cn.huan.common.utils.PageUtils;
 import cn.huan.common.utils.R;
+import cn.huan.mall.ware.entity.PurchaseEntity;
+import cn.huan.mall.ware.service.PurchaseService;
+import cn.huan.mall.ware.vo.PurchaseDoneVo;
+import cn.huan.mall.ware.vo.PurchaseItemVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -40,6 +39,45 @@ public class PurchaseController {
         return R.ok().put("page", page);
     }
 
+    /**
+     * 合并采购需求 /ware/purchase/merge
+     */
+    @PostMapping("/merge")
+    public R merge(@RequestBody PurchaseItemVo vo){
+        purchaseService.merge(vo);
+        return R.ok();
+    }
+
+    /**
+     * 查询未领取的订单 /ware/purchase/unreceive/list
+     */
+    @GetMapping("/unreceive/list")
+    public R listUnReceive(@RequestParam Map<String, Object> params){
+        PageUtils page = purchaseService.queryPageUnReceive(params);
+
+        return R.ok().put("page", page);
+    }
+
+    /**
+     * 领取采购单 /ware/purchase/received
+     * 采购人员点击领取
+     */
+    @PostMapping("/received")
+    public R received(@RequestBody List<Long> purchaseIds){
+        purchaseService.purchaseReceive(purchaseIds);
+        return R.ok();
+    }
+
+    /**
+     * 完成采购 /ware/purchase/done
+     * 采购人员点击领取
+     */
+    @PostMapping("/done")
+    public R done(@RequestBody PurchaseDoneVo doneVo){
+        purchaseService.purchaseDone(doneVo);
+        return R.ok();
+    }
+
 
     /**
      * 信息
@@ -56,6 +94,8 @@ public class PurchaseController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody PurchaseEntity purchase){
+        purchase.setCreateTime(new Date());
+        purchase.setUpdateTime(new Date());
 		purchaseService.save(purchase);
 
         return R.ok();

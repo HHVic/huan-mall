@@ -20,6 +20,13 @@ spring:
             - Path=/api/member/**
           filters:
             - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+#        库存管理路由
+        - id: ware_route
+          uri: lb://mall-ware
+          predicates:
+            - Path=/api/ware/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
 #        第三方服务路由
         - id: thirdparty_route
           uri: lb://mall-third-party
