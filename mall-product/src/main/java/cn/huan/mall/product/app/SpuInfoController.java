@@ -1,4 +1,4 @@
-package cn.huan.mall.product.controller;
+package cn.huan.mall.product.app;
 
 import cn.huan.common.utils.PageUtils;
 import cn.huan.common.utils.R;

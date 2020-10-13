@@ -1,5 +1,6 @@
 package cn.huan.mall.product.service;
 
+import cn.huan.mall.product.vo.Catelog2List;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.huan.common.utils.PageUtils;
 import cn.huan.mall.product.entity.CategoryEntity;
@@ -25,5 +26,9 @@ public interface CategoryService extends IService<CategoryEntity> {
     Long[] getCategoryPath(Long catelogId);
 
     void updateDetail(CategoryEntity category);
+
+    List<CategoryEntity> getChildren(Long parentId);
+
+    Map<String, List<Catelog2List>> catalog2List();
 }
 

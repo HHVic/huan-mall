@@ -1,4 +1,4 @@
-package cn.huan.mall.product.controller;
+package cn.huan.mall.product.app;
 
 import cn.huan.common.utils.R;
 import cn.huan.mall.product.entity.CategoryEntity;

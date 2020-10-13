@@ -1,4 +1,4 @@
-package cn.huan.mall.product.controller;
+package cn.huan.mall.product.app;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.huan.mall.product.entity.SkuInfoEntity;
-import cn.huan.mall.product.service.SkuInfoService;
+import cn.huan.mall.product.entity.SpuImagesEntity;
+import cn.huan.mall.product.service.SpuImagesService;
 import cn.huan.common.utils.PageUtils;
 import cn.huan.common.utils.R;
 
 
 
 /**
- * sku信息
+ * spu图片
  *
  * @author konghuan
  * @email 714548838@qq.com
  * @date 2020-09-14 23:09:39
  */
 @RestController
-@RequestMapping("product/skuinfo")
-public class SkuInfoController {
+@RequestMapping("product/spuimages")
+public class SpuImagesController {
     @Autowired
-    private SkuInfoService skuInfoService;
+    private SpuImagesService spuImagesService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = skuInfoService.queryPage(params);
+        PageUtils page = spuImagesService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -44,19 +44,19 @@ public class SkuInfoController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{skuId}")
-    public R info(@PathVariable("skuId") Long skuId){
-		SkuInfoEntity skuInfo = skuInfoService.getById(skuId);
+    @RequestMapping("/info/{id}")
+    public R info(@PathVariable("id") Long id){
+		SpuImagesEntity spuImages = spuImagesService.getById(id);
 
-        return R.ok().put("skuInfo", skuInfo);
+        return R.ok().put("spuImages", spuImages);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody SkuInfoEntity skuInfo){
-		skuInfoService.save(skuInfo);
+    public R save(@RequestBody SpuImagesEntity spuImages){
+		spuImagesService.save(spuImages);
 
         return R.ok();
     }
@@ -65,8 +65,8 @@ public class SkuInfoController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody SkuInfoEntity skuInfo){
-		skuInfoService.updateById(skuInfo);
+    public R update(@RequestBody SpuImagesEntity spuImages){
+		spuImagesService.updateById(spuImages);
 
         return R.ok();
     }
@@ -75,8 +75,8 @@ public class SkuInfoController {
      * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] skuIds){
-		skuInfoService.removeByIds(Arrays.asList(skuIds));
+    public R delete(@RequestBody Long[] ids){
+		spuImagesService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

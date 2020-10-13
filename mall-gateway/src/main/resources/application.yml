@@ -42,3 +42,13 @@ spring:
             - Path=/api/**
           filters:
             - RewritePath=/api/(?<segment>/?.*), /renren-fast/$\{segment}
+#          nginx发来的请求
+        - id: nginx_product_route
+          uri: lb://mall-product
+          predicates:
+            - Host=huan.mall.com
+#          nginx search
+        - id: nginx_search_route
+          uri: lb://mall-search
+          predicates:
+            - Host=search.mall.com

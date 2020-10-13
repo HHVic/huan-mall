@@ -1,4 +1,4 @@
-package cn.huan.mall.search.controller;
+package cn.huan.mall.search.api;
 
 import cn.huan.common.to.SearchProductTo;
 import cn.huan.common.utils.R;

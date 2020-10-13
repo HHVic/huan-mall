@@ -4,8 +4,12 @@ import cn.huan.mall.product.entity.BrandEntity;
 import cn.huan.mall.product.service.BrandService;
 import cn.huan.mall.product.service.CategoryService;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.Arrays;
 
@@ -16,6 +20,33 @@ class MallProductApplicationTests {
     CategoryService categoryService;
     @Autowired
     BrandService brandService;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private RedissonClient redissonClient;
+
+    @Test
+    public void testRedis(){
+        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+        ops.set("hello","word");
+        System.out.println(ops.get("hello"));
+
+    }
+
+    @Test
+    public void testRedisson(){
+        RLock lock = redissonClient.getLock("lock");
+        lock.lock();
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            lock.unlock();
+        }
+    }
 
     @Test
     public void contextLoads() {

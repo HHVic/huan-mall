@@ -2,6 +2,7 @@ package cn.huan.mall.search.service.impl;
 
 import cn.huan.common.to.SearchProductTo;
 import cn.huan.mall.search.config.ElasticSearchConfig;
+import cn.huan.mall.search.constant.EsConstant;
 import cn.huan.mall.search.service.ProductSearchService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
 
         BulkRequest bulkRequest = new BulkRequest();
         for (SearchProductTo searchProductTo : searchProductTos){
-            IndexRequest indexRequest = new IndexRequest("product");
+            IndexRequest indexRequest = new IndexRequest(EsConstant.PRODUCT_INDEX);
             indexRequest.id(searchProductTo.getSkuId().toString());
             String jsonString = JSON.toJSONString(searchProductTo);
             indexRequest.source(jsonString, XContentType.JSON);
