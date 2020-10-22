@@ -1,5 +1,6 @@
 package cn.huan.mall.member.service;
 
+import cn.huan.mall.member.vo.LoginVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.huan.common.utils.PageUtils;
 import cn.huan.mall.member.entity.MemberEntity;
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface MemberService extends IService<MemberEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    MemberEntity login(LoginVo loginVo);
 }
 

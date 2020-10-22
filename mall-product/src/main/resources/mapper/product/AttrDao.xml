@@ -19,5 +19,23 @@
         SELECT attr_id FROM pms_attr WHERE search_type=1
     </select>
 
+    <resultMap id="getListWithGroupBySpuId" type="cn.huan.mall.product.vo.ItemDescVo$BaseAttrWithGroup">
+        <result column="attr_group_name" property="groupName"></result>
+        <collection property="attrInfos" ofType="cn.huan.mall.product.vo.ItemDescVo$BaseAttrWithGroup$BaseAttrInfo">
+            <result column="attr_name" property="attrName"></result>
+            <result column="attr_value" property="attrValue"></result>
+        </collection>
+    </resultMap>
+    <select id="getListWithGroupBySpuId" resultMap="getListWithGroupBySpuId">
+        SELECT ag.attr_group_name,
+               a.attr_name,
+               pav.attr_value
+        FROM pms_attr_group ag
+        LEFT JOIN pms_attr_attrgroup_relation aar ON ag.attr_group_id=aar.attr_group_id
+        LEFT JOIN pms_attr a ON a.attr_id=aar.attr_id
+        LEFT JOIN pms_product_attr_value pav ON pav.attr_id=a.attr_id
+        WHERE a.catelog_id=#{catalogId} AND pav.spu_id=#{spuId}
+    </select>
+
 
 </mapper>

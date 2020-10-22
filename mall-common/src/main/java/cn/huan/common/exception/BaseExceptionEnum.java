@@ -7,7 +7,9 @@ public enum BaseExceptionEnum {
 
     PRODUCT_ALREADY_UP(10002,"商品已上架"),
 
-    SPU_INFO_NOT_FOUND(10003,"spu商品信息不存在")
+    SPU_INFO_NOT_FOUND(10003,"spu商品信息不存在"),
+
+    USER_ACCOUNT_PASSWORD_INVALID(12001,"用户名或密码错误")
     ;
 
 

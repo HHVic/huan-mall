@@ -30,3 +30,4 @@ mybatis-plus:
 #logging:
 #  level:
 #    cn.huan.mall.product.dao: debug
+

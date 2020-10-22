@@ -1,8 +1,11 @@
 package cn.huan.mall.product;
 
 import cn.huan.mall.product.entity.BrandEntity;
+import cn.huan.mall.product.service.AttrService;
 import cn.huan.mall.product.service.BrandService;
 import cn.huan.mall.product.service.CategoryService;
+import cn.huan.mall.product.service.SkuSaleAttrValueService;
+import cn.huan.mall.product.vo.ItemDescVo;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -12,6 +15,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 class MallProductApplicationTests {
@@ -26,6 +30,24 @@ class MallProductApplicationTests {
 
     @Autowired
     private RedissonClient redissonClient;
+
+    @Autowired
+    private SkuSaleAttrValueService skuSaleAttrValueService;
+
+    @Autowired
+    private AttrService attrService;
+
+
+    @Test
+    public void testSaleAttr(){
+        List<ItemDescVo.SaleAttr> saleAttrList = skuSaleAttrValueService.getListWithReferredSkusBySpuId(16L);
+        System.out.println(saleAttrList);
+    }
+
+    @Test
+    public void testBaseAttr(){
+        System.out.println(attrService.getListWithGroupBySpuId(16L, 225L));
+    }
 
     @Test
     public void testRedis(){

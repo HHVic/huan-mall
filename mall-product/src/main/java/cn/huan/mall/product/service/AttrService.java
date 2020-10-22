@@ -4,6 +4,7 @@ import cn.huan.common.utils.PageUtils;
 import cn.huan.mall.product.entity.AttrEntity;
 import cn.huan.mall.product.vo.AttrRespVo;
 import cn.huan.mall.product.vo.AttrVo;
+import cn.huan.mall.product.vo.ItemDescVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -33,5 +34,7 @@ public interface AttrService extends IService<AttrEntity> {
     PageUtils queryPageNoAttrRelation(Map<String, Object> params, Long attrGroupId);
 
     List<Long> getSearchableId();
+
+    List<ItemDescVo.BaseAttrWithGroup> getListWithGroupBySpuId(Long spuId, Long catalogId);
 }
 

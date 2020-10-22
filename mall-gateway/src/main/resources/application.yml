@@ -46,9 +46,14 @@ spring:
         - id: nginx_product_route
           uri: lb://mall-product
           predicates:
-            - Host=huan.mall.com
+            - Host=huan.mall.com,item.mall.com
 #          nginx search
         - id: nginx_search_route
           uri: lb://mall-search
           predicates:
             - Host=search.mall.com
+#          auth 服务
+        - id: nginx_auth_route
+          uri: lb://mall-auth-server
+          predicates:
+            - Host=auth.mall.com

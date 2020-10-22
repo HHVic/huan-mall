@@ -15,6 +15,7 @@ import cn.huan.mall.product.service.AttrService;
 import cn.huan.mall.product.service.CategoryService;
 import cn.huan.mall.product.vo.AttrRespVo;
 import cn.huan.mall.product.vo.AttrVo;
+import cn.huan.mall.product.vo.ItemDescVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -214,6 +215,11 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     @Override
     public List<Long> getSearchableId() {
         return baseMapper.getSearchableId();
+    }
+
+    @Override
+    public List<ItemDescVo.BaseAttrWithGroup> getListWithGroupBySpuId(Long spuId, Long catalogId) {
+        return baseMapper.getListWithGroupBySpuId(spuId,catalogId);
     }
 
 }

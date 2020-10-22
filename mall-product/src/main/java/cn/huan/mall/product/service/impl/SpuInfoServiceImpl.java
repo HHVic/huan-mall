@@ -14,6 +14,7 @@ import cn.huan.mall.product.feign.SearchFeignService;
 import cn.huan.mall.product.feign.WareFeignService;
 import cn.huan.mall.product.service.*;
 import cn.huan.mall.product.vo.*;
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -264,7 +265,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             Map<Long, Integer> map = null;
             if(r.isOk()){
                 log.info("商品：{}库存查询成功",skuIds);
-                map = (Map<Long, Integer>) r.getData();
+                map = (Map<Long, Integer>) r.getData(new TypeReference<Map<Long, Integer>>(){});
             }
 
             Map<Long, Integer> finalMap = map;

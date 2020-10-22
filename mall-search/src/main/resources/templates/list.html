@@ -64,7 +64,8 @@
         </b>
         <ul>
             <li>
-                <a href="static/search/#" class="li_2">你好，请登录</a>
+                <a th:if="${session.loginUser != null}">[[${session.loginUser.nickname}]]</a>
+                <a th:if="${session.loginUser == null}" href="http://auth.mall.com/login.html" class="li_2">你好，请登录</a>
             </li>
             <li>
                 <a href="static/search/#">免费注册</a>
@@ -1186,13 +1187,13 @@
                                 <a href="static/search/#">关注</a>
                             </div>
                             <p class="da">
-                                <a href="static/search/#">
+                                <a th:href="|http://item.mall.com/${product.skuId}.html|">
                                     <img th:src="${product.skuImg}" class="dim">
                                 </a>
                             </p>
                             <ul class="tab_im">
                                 <li>
-                                    <a href="static/search/#" title="黑色">
+                                    <a th:href="|http://item.mall.com/${product.skuId}.html|" title="黑色">
                                         <img th:src="${product.skuImg}">
                                     </a>
                                 </li>
