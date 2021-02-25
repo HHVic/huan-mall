@@ -4,12 +4,5 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
 
-    alicloud:
-      access-key:
-      secret-key:
-      oss:
-        endpoint:
-        bucket: huan-mall
-
 server:
   port: 30000
